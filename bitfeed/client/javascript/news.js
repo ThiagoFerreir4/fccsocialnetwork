@@ -41,14 +41,17 @@ Meteor.methods({
 
 
 Router.route('/', function(){
-    this.render('allNewsView');
-},{
-    name: 'news.all'
+    this.render('allNewsView', {
+        name: 'news.all'
+    });
 });
 
+
 Router.route('/news/add', function(){
-    this.render('addNews');
-},{
-    name: 'news.add'
+    this.render('addNews', {
+        name: 'news.add'
+    });
 });
+   
+
 
