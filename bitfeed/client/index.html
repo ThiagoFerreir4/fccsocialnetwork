@@ -1,0 +1,20 @@
+<head>
+        <title>BitFeed</title>
+</head>
+<body>
+        <div class='container'>
+            <div class='row'>
+                    <div class='col-xs-12'>
+                            <div class='page-header'>
+                                    {{#if currentUser}}
+                                        {{> buttons}}
+                                        <a class='btn btn-success pull-right' href='/news/add' role='button'>Add News</a>
+                                    {{else}} 
+                                        <a class='btn btn-success pull-right' href='/login' role='button'>Login</a>
+                                    {{/if}}
+                                    <h1><a href='/'>BitFeed News</a></h1>
+                            </div>
+                    </div>
+            </div>
+    </div>
+ </body>
