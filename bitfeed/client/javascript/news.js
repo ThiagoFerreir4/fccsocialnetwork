@@ -1,6 +1,7 @@
 
     
 Meteor.subscribe('theNews');
+ Meteor.subscribe('allUsers');
 
 Template.allNewsView.helpers({
         news: function () {
@@ -29,25 +30,39 @@ Template.addNews.events({
 Template.register.events({
     'submit form': function(event){
         event.preventDefault();
-        var emailVar = event.target.registerEmail.value;
-        var passwordVar = event.target.registerPassword.value;
-        console.log('form submitted');
-        Accounts.createUser({
-            email: emailVar,
-            password: passwordVar 
+        var username =  event.target.registerUsername.value;
+        var email = event.target.registerEmail.value;
+        var password = event.target.registerPassword.value;
+        var firstName = event.target.registerFirstName.value;
+        var lastName = event.target.registerLastName.value;
+
+        var user = {'email':email,password:password,username:username,profile:{name:firstName + ' '+lastName}};
+
+        Accounts.createUser(user, function(err){
+            if(!err){
+                Router.go('/')
+            }
+            else {
+                console.log('somthing went wrong');
+            }
         });
-        Router.go('/');
     }
 });
 
 Template.login.events({
     'submit form': function(event){
         event.preventDefault();
-        var emailVar = event.target.loginEmail.value;
-        var passwordVar = event.target.loginPassword.value;
+        var email = event.target.loginEmail.value;
+        var password = event.target.loginPassword.value;
         console.log('form submited');
-        Meteor.loginWithPassword(emailVar, passwordVar);
-        Router.go('/');
+        Meteor.loginWithPassword(email, password, function(err){
+            if(!err){
+                Router.go('/');
+            } 
+            else {
+                console.log('somethings not right');
+            }
+        });
     }
 });
 
@@ -56,5 +71,17 @@ Template.buttons.events({
         event.preventDefault();
         Meteor.logout();
         Router.go('/');
+    }
+});
+
+Template.profile.helpers({
+    name: function(){
+        return Meteor.user().profile.name;
+    },
+    username: function(){
+        return Meteor.user().username;
+    },
+    email: function(){
+        return Meteor.user().emails[0].address;
     }
 });

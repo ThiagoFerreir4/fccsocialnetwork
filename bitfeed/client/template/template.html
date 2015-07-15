@@ -52,8 +52,11 @@
 
  <template name='register'>
          <form>
+                 <input type='username' name='registerUsername' placeholder='Username'>
                  <input type='email' name='registerEmail' placeholder='Email'>
-                 <input type='password' name='registerPassword' placeholder='Password'>
+                 <input type='password' name='registerPassword' placeholder='Password'> 
+                 <input type='firstname' name='registerFirstName' placeholder='First Name'>
+                 <input type='lastname' name='registerLastName' placeholder='Last Name'>
                  <input type='submit' value='Register'>
          </form>
  </template>
@@ -70,3 +73,11 @@
  <template name='buttons'>
     <a id='logout' class='btn btn-danger pull-right' href='/' role='button'>Log Out</a>
 </template>
+
+<template name='profile'>
+        Username: {{username}}<br>
+        Email: {{email}}
+        {{#with profile}}
+            Full Name: {{name}}
+            {{/with}}
+ </template>

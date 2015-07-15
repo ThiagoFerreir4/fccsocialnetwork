@@ -28,3 +28,7 @@ Router.route('/login', function(){
 Router.route('/register', function(){
     this.render('register');
 });
+
+Router.route('/profile/:username',function(){
+        this.render('profile');
+});

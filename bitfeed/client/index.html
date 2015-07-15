@@ -9,6 +9,7 @@
                                     {{#if currentUser}}
                                         {{> buttons}}
                                         <a class='btn btn-success pull-right' href='/news/add' role='button'>Add News</a>
+                                        <a class='btn btn-success pull-right' href='/profile/{{currentUser.username}}' role='button'>Profile</a>
                                     {{else}} 
                                         <a class='btn btn-success pull-right' href='/login' role='button'>Login</a>
                                     {{/if}}
