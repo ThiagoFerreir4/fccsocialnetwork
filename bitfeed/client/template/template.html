@@ -17,6 +17,7 @@
  <template name='newsItem'>
          <li class='list-group-item'>
                  <a href="{{url}}" target='_blank'>{{title}}</a>
+                 <p>{{username}}</p>
                  <a href='/news/{{urlTitle}}' class='badge no-style'>comments</a>
          </li>
  </template>
@@ -42,6 +43,7 @@
                  <div class='row'>
                          <div class="col-xs-8 col-xs-offset-2">
                                  <h1>{{title}}</h1>
+                                 <h2>{{username}}</h2>
                                  <hr/>
                                  <h2>Comments</h2>
                                  <span>The comments are coming</span>
