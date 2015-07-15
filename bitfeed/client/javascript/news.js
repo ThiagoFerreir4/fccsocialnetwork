@@ -1,12 +1,14 @@
-News = new Mongo.Collection('news');
 
 if(Meteor.isClient){
     
+News = new Mongo.Collection('news');
+
     Template.allNewsView.helpers({
-        news: function(){
+        'news': function(){
             return News.find({}, {sort: {dateAdded: -1}});
         }
     });
+
 
 Template.addNews.events({
     'submit .addNewsForm': function(e){
@@ -20,27 +22,52 @@ Template.addNews.events({
 
             Meteor.call('addNews',title,url); //method to create and add new items
 
-            Router.go('news.all'); // load new route
+            Router.go('/'); // load new route
 
             return false; // trll JS that you have handled the submit
     }
 });
 
-
-Meteor.methods({
-    addNew: function(title, url){
-        News.insert({
-            title: title,
-            url: url,
-            urlTitle:title.replace(/\s/g,'-'), //crate a slug
-            dateAdded: new Date()
+Template.register.events({
+    'submit form': function(event){
+        event.preventDefault();
+        var emailVar = event.target.registerEmail.value;
+        var passwordVar = event.target.registerPassword.value;
+        console.log('form submitted');
+        Accounts.createUser({
+            email: emailVar,
+            password: passwordVar 
         });
+        Router.go('/');
     }
 });
-}
+
+Template.login.events({
+    'submit form': function(event){
+        event.preventDefault();
+        var emailVar = event.target.loginEmail.value;
+        var passwordVar = event.target.loginPassword.value;
+        console.log('form submited');
+        Meteor.loginWithPassword(emailVar, passwordVar);
+        Router.go('/');
+    }
+});
+Template.buttons.events({
+    'click #logout': function(event){
+        event.preventDefault();
+        Meteor.logout();
+        Router.go('/');
+    }
+});
+
+};
+
+
+
 
 
 Router.route('/', function(){
+        console.log('Im rendering');
     this.render('allNewsView', {
         name: 'news.all'
     });
@@ -54,4 +81,17 @@ Router.route('/news/add', function(){
 });
    
 
+Router.route('/news/:title', function(){
+    this.render('newsView',{
+            data: function(){
+                return News.findOne({urlTitle: this.params.title});
+            }
+    });
+});
+Router.route('/login', function(){
+    this.render('login');
+});
 
+Router.route('/register', function(){
+    this.render('register');
+});
