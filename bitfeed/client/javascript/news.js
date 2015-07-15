@@ -1,14 +1,12 @@
 
-if(Meteor.isClient){
     
-News = new Mongo.Collection('news');
+Meteor.subscribe('theNews');
 
-    Template.allNewsView.helpers({
-        'news': function(){
-            return News.find({}, {sort: {dateAdded: -1}});
-        }
+Template.allNewsView.helpers({
+        news: function () {
+                    return News.find({},{sort: {dateAdded: -1}});
+                }
     });
-
 
 Template.addNews.events({
     'submit .addNewsForm': function(e){
@@ -52,46 +50,11 @@ Template.login.events({
         Router.go('/');
     }
 });
+
 Template.buttons.events({
     'click #logout': function(event){
         event.preventDefault();
         Meteor.logout();
         Router.go('/');
     }
-});
-
-};
-
-
-
-
-
-Router.route('/', function(){
-        console.log('Im rendering');
-    this.render('allNewsView', {
-        name: 'news.all'
-    });
-});
-
-
-Router.route('/news/add', function(){
-    this.render('addNews', {
-        name: 'news.add'
-    });
-});
-   
-
-Router.route('/news/:title', function(){
-    this.render('newsView',{
-            data: function(){
-                return News.findOne({urlTitle: this.params.title});
-            }
-    });
-});
-Router.route('/login', function(){
-    this.render('login');
-});
-
-Router.route('/register', function(){
-    this.render('register');
 });
