@@ -28,3 +28,14 @@ Router.route('/login', function(){
 Router.route('/register', function(){
     this.render('register');
 });
+
+Router.route('/profile/:_id', {
+    name: 'profile',
+    waitOn: function(){
+    return Meteor.subscribe('allUsers', this.params._id)},
+    data: function(){
+        var user = this.params._id;
+        return Meteor.users.findOne({_id: user});
+    },
+});
+
