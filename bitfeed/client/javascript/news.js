@@ -75,13 +75,17 @@ Template.buttons.events({
 });
 
 Template.profile.helpers({
-    name: function(){
-        return Meteor.user().profile.name;
+    name: function(){    
+        return this.name;
     },
     username: function(){
-        return Meteor.user().username;
+        return this.username;
     },
     email: function(){
-        return Meteor.user().emails[0].address;
+        return this.emails[0].address;
+    },
+    log: function(){
+        console.log(this);
     }
 });
+

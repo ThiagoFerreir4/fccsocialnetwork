@@ -16,8 +16,8 @@
 
  <template name='newsItem'>
          <li class='list-group-item'>
-                 <a href="{{url}}" target='_blank'>{{title}}</a>
-                 <p>{{username}}</p>
+                 <a href="{{url}}" target='_blank'>{{title}}</a> by
+                 <a href="/profile/{{owner}}">{{username}}</a> <!-- TODO// fix link -->
                  <a href='/news/{{urlTitle}}' class='badge no-style'>comments</a>
          </li>
  </template>
@@ -74,12 +74,17 @@
  </template>
  <template name='buttons'>
     <a id='logout' class='btn btn-danger pull-right' href='/' role='button'>Log Out</a>
+    <a class='btn btn-success pull-right' href="{{pathFor 'profile' data=currentUser}}" role='button'>Profile</a>
 </template>
 
 <template name='profile'>
+        {{#if  currentUser}}
         Username: {{username}}<br>
         Email: {{email}}
+        {{log}}
         {{#with profile}}
             Full Name: {{name}}
+            {{log}}
             {{/with}}
+         {{/if}}
  </template>
