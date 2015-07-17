@@ -1,7 +1,7 @@
 Template.login.events({
     'click #github': function(){
         return Meteor.loginWithGithub({
-            requestPermissions: ['name','avatar_url','bio','email','user','public_repo']
+            requestPermissions: ['user']
         }, function(error){
             if(error){
                 return console.log(error,reason);
@@ -32,6 +32,7 @@ Template.signInWithEmailModal.events({
                 console.log('somthing went wrong');
             }
         });
+
     },
 
     'click #signIn': function(event){

@@ -11,7 +11,7 @@
         }
     });
     if (result.error)
-            throw result.error;
+            throw result.console.error();;
 
     profile=_.pick(result.data,
                   'login',

@@ -7,10 +7,13 @@ Template.profile.helpers({
     username: function(){
         return this.username;
     },
-    email: function(){
+    emails: function(){
         return this.emails[0].address;
     },
     log: function(){
         console.log(this);
+    },
+    avatar_url: function(){
+        return this.avatar_url;
     }
 });
