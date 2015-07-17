@@ -1,4 +1,3 @@
-if(Meteor.isServer){
 
 
 Meteor.publish('theNews', function(){
@@ -19,4 +18,4 @@ Meteor.methods({
         });
     }
 });
-};
+
