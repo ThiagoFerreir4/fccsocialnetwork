@@ -27,14 +27,14 @@ Template.addNews.events({
     }
 });
 
-Template.register.events({
-    'submit form': function(event){
+Template.signInWithEmailModal.events({
+    'click #createAccount': function(event){
         event.preventDefault();
-        var username =  event.target.registerUsername.value;
-        var email = event.target.registerEmail.value;
-        var password = event.target.registerPassword.value;
-        var firstName = event.target.registerFirstName.value;
-        var lastName = event.target.registerLastName.value;
+        var username =  document.getElementById('username').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
 
         var user = {'email':email,password:password,username:username,profile:{name:firstName + ' '+lastName}};
 
@@ -46,14 +46,12 @@ Template.register.events({
                 console.log('somthing went wrong');
             }
         });
-    }
-});
+    },
 
-Template.login.events({
-    'submit form': function(event){
+    'click #signIn': function(event){
         event.preventDefault();
-        var email = event.target.loginEmail.value;
-        var password = event.target.loginPassword.value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
         console.log('form submited');
         Meteor.loginWithPassword(email, password, function(err){
             if(!err){
