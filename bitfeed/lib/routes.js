@@ -1,4 +1,4 @@
-
+// Root page
 Router.route('/', function(){
         console.log('Im rendering');
     this.render('allNewsView', {
@@ -6,13 +6,13 @@ Router.route('/', function(){
     });
 });
 
-
+// News
 Router.route('/news/add', function(){
     this.render('addNews', {
         name: 'news.add'
     });
 });
-   
+
 
 Router.route('/news/:title', function(){
     this.render('newsView',{
@@ -21,6 +21,8 @@ Router.route('/news/:title', function(){
             }
     });
 });
+
+// Login and profile
 Router.route('/login', function(){
     this.render('login');
 });
@@ -35,4 +37,3 @@ Router.route('/profile/:_id', {
         return Meteor.users.findOne({_id: user});
     },
 });
-

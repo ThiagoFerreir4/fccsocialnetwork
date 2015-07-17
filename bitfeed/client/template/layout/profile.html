@@ -1,0 +1,11 @@
+<template name='profile'>
+        {{#if  currentUser}}
+        Username: {{username}}<br>
+        Email: {{email}}
+        {{log}}
+        {{#with profile}}
+            Full Name: {{name}}
+            {{log}}
+            {{/with}}
+         {{/if}}
+ </template>
