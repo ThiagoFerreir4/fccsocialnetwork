@@ -1,0 +1,14 @@
+<template name='profile'>
+        {{#if  currentUser}}
+        Username: {{username}}<br>
+        Email: {{emails}}
+        {{log}}
+        {{#with profile}}
+            Full Name: {{name}}
+         <img src="{{avatar_url}}">
+         {{login}}
+         {{email}}
+            {{log}}
+            {{/with}}
+         {{/if}}
+ </template>

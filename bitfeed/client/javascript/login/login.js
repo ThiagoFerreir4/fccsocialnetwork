@@ -1,31 +1,17 @@
-
-    
-Meteor.subscribe('theNews');
- Meteor.subscribe('allUsers');
-
-Template.allNewsView.helpers({
-        news: function () {
-                    return News.find({},{sort: {dateAdded: -1}});
-                }
-    });
-
-Template.addNews.events({
-    'submit .addNewsForm': function(e){
-    
-            var title= e.target.title.value; //gets title
-            var url= e.target.url.value; // gets url
-
-            if(!title || !url){
-                return false;
+Template.login.events({
+    'click #github': function(){
+        return Meteor.loginWithGithub({
+            requestPermissions: ['user']
+        }, function(error){
+            if(error){
+                return console.log(error,reason);
+            } else {
+                    Router.go('/');
             }
-
-            Meteor.call('addNews',title,url); //method to create and add new items
-
-            Router.go('/'); // load new route
-
-            return false; // trll JS that you have handled the submit
+        });
     }
 });
+
 
 Template.signInWithEmailModal.events({
     'click #createAccount': function(event){
@@ -46,6 +32,7 @@ Template.signInWithEmailModal.events({
                 console.log('somthing went wrong');
             }
         });
+
     },
 
     'click #signIn': function(event){
@@ -56,34 +43,10 @@ Template.signInWithEmailModal.events({
         Meteor.loginWithPassword(email, password, function(err){
             if(!err){
                 Router.go('/');
-            } 
+            }
             else {
                 console.log('somethings not right');
             }
         });
     }
 });
-
-Template.buttons.events({
-    'click #logout': function(event){
-        event.preventDefault();
-        Meteor.logout();
-        Router.go('/');
-    }
-});
-
-Template.profile.helpers({
-    name: function(){    
-        return this.name;
-    },
-    username: function(){
-        return this.username;
-    },
-    email: function(){
-        return this.emails[0].address;
-    },
-    log: function(){
-        console.log(this);
-    }
-});
-

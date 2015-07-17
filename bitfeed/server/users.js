@@ -1,12 +1,3 @@
-Meteor.publish('allUsers', function(requestedUserId){
-    return Meteor.users.find({_id: requestedUserId},{
-        fields: {
-            profile: 1,
-            emails: 1,
-            username: 1
-        }
-    });
-});
 
 
 /*Accounts.onCreateUser(function (options, user){
@@ -20,7 +11,7 @@ Meteor.publish('allUsers', function(requestedUserId){
         }
     });
     if (result.error)
-            throw result.error;
+            throw result.console.error();;
 
     profile=_.pick(result.data,
                   'login',
@@ -37,5 +28,5 @@ Meteor.publish('allUsers', function(requestedUserId){
                   user.profile = profile;
 
                   return user;
-                  
+
 });*/
