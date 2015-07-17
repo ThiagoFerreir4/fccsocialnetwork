@@ -10,3 +10,8 @@ mizzao:bootstrap-3
 iron:router
 accounts-ui
 accounts-password
+accounts-github
+service-configuration
+http
+email
+meteorhacks:ssr
